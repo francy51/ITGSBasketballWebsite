@@ -973,7 +973,7 @@ const IndividualPlayer = {
 const IndividualGame = {
     template: `
         <div>
-            <div v-if="game != null">
+            <div v-if="game">
                 <div id="fixtureHeader" class="row">
                     <h6>Date - {{game.date}}</h6>
                     <h6>Location - {{game.location}}</h6>
@@ -996,35 +996,51 @@ const IndividualGame = {
             </div>
         </div>
     `,
-    computed: {
-        game: function() {
-            console.log(this.$parent.Games);
-            for (var i = 0; i < this.$parent.Games.length; i++) {
-                if (this.$parent.Games[i]._id == this.$route.params.id) {
-                    return this.$parent.Games[i];
-                }
-            }
-            return null;
+    data: function() {
+        return {
+            game: {}
         }
+    },
+    methods: {
+        getGame: function() {
+            axios.get('/game/' + this.$route.params.id).then((r) => {
+                this.game = r.data.game;
+                console.log(r);
+            })
+        }
+    },
+    created: function() {
+        this.getGame();
     }
 
 }
 const IndividualTeam = {
     template: `
-        <div>
-          <team-tab v:bind:team='team'></team-tab>
+        <div v-if="team">
+            <team-tab v-bind:team='team' ></team-tab>
+            <h3>Staff:</h3>
+            <ul class="no-bullets">
+                <li v-for="staff in team.staff">{{staff.role}} {{staff.firstName}} {{staff.lastName}}t</li>
+            </ul>
+            <h3>Players:</h3>
+            <ul class="no-bullets">
+                <li v-for="player in team.players">{{player.firstName}} {{player.lastName}}t</li>
+            </ul>
+        
+            
         </div>
     `,
-    date: function() {
-        team: {}
+    data: function() {
+        return {
+            team: {}
+        }
     },
     methods: {
         getTeam: function() {
-            axios.get('/team/' + this.$route.params.id).then(
-                (r) => {
-                    this.team = r.data.team;
-                    console.log(r)
-                })
+            axios.get('/team/' + this.$route.params.id).then((r) => {
+                this.team = r.data.team;
+                console.log(r)
+            })
         }
     },
     created: function() {

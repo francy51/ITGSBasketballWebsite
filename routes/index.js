@@ -130,6 +130,16 @@ router.get('/team/:id', function(req, res, next) {
     })
 })
 
+router.get('/game/:id', function(req, res, next) {
+    Game.findOne({ "_id": req.params.id }, function(err, game) {
+        if (err) {
+            console.error(err)
+            res.json({ success: false, msg: "error" })
+        }
+        res.json({ success: true, msg: "succesfull", game: game })
+    })
+})
+
 
 router.get('/player/:id', function(req, res, next) {
     Player.findOne({ "_id": req.params.id }, function(err, player) {

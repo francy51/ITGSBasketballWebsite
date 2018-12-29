@@ -41,7 +41,7 @@ var db = mongoose.connection;
 //Bind connection to error event (to get notification of connection errors)
 db.on('error', console.error.bind(console, 'MongoDB connection error:'));
 
-app.use(fileUpload({ safeFileNames: true, preserveExtension: true }))
+app.use(fileUpload({ safeFileNames: false, preserveExtension: true }))
 
 app.use('/', indexRouter);
 require('./routes/users')(app, passport);
