@@ -134,6 +134,7 @@ router.post('/newTeam', function(req, res, next) {
 
 });
 
+//Creates a new game
 router.post('/newGame', function(req, res, next) {
     console.log(req.body);
 
@@ -161,5 +162,19 @@ router.post('/newGame', function(req, res, next) {
     })
 
 })
+//Updates an already existing fixture
+router.put('/fixture', function(req, res, next) {
+    game.findById(req.body.fixture._id, function(err, game) {
+        if (err) return console.log(err);
+
+        game.set(req.body.fixture);
+        game.save(function(err, updatedFixture) {
+            if (err) return console.log(err);
+            res.send(updatedFixture);
+        });
+    });
+
+})
+
 
 module.exports = router;

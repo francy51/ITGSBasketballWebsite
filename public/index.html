@@ -47,13 +47,16 @@
                 <template v-if="User.token">
                     
                 <!--Admin restricted routes-->
-                <router-link class="nav-link" to="/newPlayer" v-if="User.info.adminLevel >= 1">Add a player</router-link>
-                <router-link class="nav-link" to="/newStaff" v-if="User.info.adminLevel >= 1">Add a staff member</router-link>
-                <router-link class="nav-link" to="/newTeam" v-if="User.info.adminLevel >= 1">Add a new team</router-link>
-                <router-link class="nav-link" to="/newGame" v-if="User.info.adminLevel >= 1">Add a new game</router-link>
-                
+                <template v-if="User.info.adminLevel >= 1">
+                    <router-link class="nav-link" to="/newPlayer">Add a player</router-link>
+                    <router-link class="nav-link" to="/newStaff">Add a staff member</router-link>
+                    <router-link class="nav-link" to="/newTeam">Add a new team</router-link>
+                    <router-link class="nav-link" to="/newGame">Add a new game</router-link>
+                    <router-link class="nav-link" to="/update">Update a fixture</router-link>
+                </template>
+
                 <router-link class="nav-link" to="/home"><span v-on:click="logout">Logout</span></router-link>
-                
+
                 </template>
                 <!--Not logged in options-->
                 <router-link class="nav-link" to="/authentication" v-else>Login</router-link>
