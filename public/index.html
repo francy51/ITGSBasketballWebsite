@@ -61,10 +61,7 @@
                 <!--Not logged in options-->
                 <router-link class="nav-link" to="/authentication" v-else>Login</router-link>
 
-
             </nav>
-
-
             <div id="main-body" class="row">
                 <div id="sideBar" class="col-xs-2">
                     <ul class="no-bullets" v-if="Games.length"> Latest Games
@@ -94,6 +91,15 @@
     </body>
 
     <!-- Custom vue app -->
+    <script type="text/javascript" src="javascripts/components.js"></script>
+    <script type="text/javascript" src="javascripts/routeComponents/home.js"></script>
+    <script type="text/javascript" src="javascripts/routeComponents/fixtures.js"></script>
+    <script type="text/javascript" src="javascripts/routeComponents/game.js"></script>
+    <script type="text/javascript" src="javascripts/routeComponents/admin.js"></script>
+    <script type="text/javascript" src="javascripts/routeComponents/team.js"></script>
     <script type="text/javascript" src="javascripts/App.js"></script>
+
+
+
 
 </html>

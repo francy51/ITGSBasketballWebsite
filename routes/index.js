@@ -152,11 +152,12 @@ router.get('/fixture/:id', function(req, res, next) {
 
 
 router.get('/player/:id', function(req, res, next) {
-    Player.findOne({ "_id": req.params.id, "isPlayed": false }, function(err, player) {
+    Player.findOne({ "_id": req.params.id }, function(err, player) {
         if (err) {
             console.error(err)
             res.json({ success: false, msg: "error" })
         }
+        console.log(player);
         res.json({ success: true, msg: "succesfull", player: player })
     })
 })

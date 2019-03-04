@@ -164,10 +164,10 @@ router.post('/newGame', function(req, res, next) {
 })
 //Updates an already existing fixture
 router.put('/fixture', function(req, res, next) {
-    game.findById(req.body.fixture._id, function(err, game) {
+    game.findById(req.body._id, function(err, game) {
         if (err) return console.log(err);
-
-        game.set(req.body.fixture);
+        req.body.isPlayed = true;
+        game.set(req.body);
         game.save(function(err, updatedFixture) {
             if (err) return console.log(err);
             res.send(updatedFixture);
